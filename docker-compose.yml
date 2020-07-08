@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+  rabbit:
+    image: dockertaiga/rabbit
+    command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server"
+    restart: unless-stopped
+    networks:
+      - default
+    env_file:
+      - variables.env
+    ports:
+      - 5672:5672
+      - 15672:15672

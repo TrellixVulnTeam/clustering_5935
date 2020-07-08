@@ -1,0 +1,52 @@
+
+
++++++++++++++++++++++++++++++++++++++ Architecture globale incrémentielle DBSCAN ++++++++++++++++++++++++++++++++++++++++++++
++                                                                                                                           +
++       Une fois le train initial du DBSCAN terminé, le DBSCAN incrémental a lieu.                                          +
++       Le pseudo-code de l'algorithme incrémental DBSCAN est présenté ci-dessous.                                          +
++       Son travail consiste à prédire où les données entrantes sont regroupées et à mettre à jour l'algorithme.            +
++                                                                                                                           +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++ Algorithme DBSCAN incrémental ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                                                                                                                           +
++                               Pseudo-code de l'algorithme incrémental DBSCAN                                              +
++                                                                                                                           +
++                                                                                                                           +
++                                                                                                                           +
++ 1. Paramètres utilisés                                                                                                    +
++ 1.1. D <- Un ensemble de données contenant n objets {X1, X2, ..., Xn}                                                     +
++                                                                                                                           +
++ 1.2. eps <- rayon du cluster                                                                                              +
++                                                                                                                           +
++ 1.3. minPts <- nombre minimum d'objets de données (minPts minimum doit être                                               +
++ (Dimensions de l'ensemble de données + 1))                                                                                +
++                                                                                                                           +
++ 1.4. Ci (où i = 1, 2, 3, ..., m) <- nouvelle donnée                                                                       +
++                                                                                                                           +
++                                                                                                                           +
++ 2. K <- Clusters déjà existants                                                                                           +
++                                                                                                                           +
++                                                                                                                           +
++ 3. De nouvelles données (stream) arrivent au traitement. Ils seront regroupés directement, sur la base de                       +
++ la moyenne minimale (M) entre les données et les objets centraux du déjà existant clusters.                               +                                                                                  +
++                                                                                                                           +
++                                                                                                                           +
++ 4. POUR (i = 1: m):                                                                                                       +
++ 4.1. Trouver la distance moyenne dis (Ci, M) entre l'article et les éléments de base de chaque cluster.                   +                                                                                                     +
++                                                                                                                           +
++ REMARQUE: Un point est un POINT FONDAMENTAL si au moins minPts sont à une distance eps de                                 +
++ ça. En d'autres termes, un point est un CORE POINT s'il fait partie d'un cluster et                                       +
++ pas une valeur aberrante.                                                                                                 +
++                                                                                                                           +
++ 4.2. SI ((dis (Ci, M) est minimum) ET (Ci <= eps) ET (taille (Kp)> = minPts)):                                            +
++ 4.2.1. Unir le cluster Kp à l'item Ci (Kp U Ci)                                                                           +
++                                                                                                                           +
++ 4.3. AUTRE SI ((dis (Ci, M)! = Minimum) OU (Ci> eps) OU (taille (Kp) <minPts)):                                           +
++ 4.3.1. Définir l'élément comme aberrant (Oi)                                                                              +
++                                                                                                                           +
++ 4.4. ELSE IF (Count (Oi)> minPts):                                                                                        +
++ 4.4.1. Former un nouveau cluster avec l'Oi                                                                                +
++                                                                                                                           +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
